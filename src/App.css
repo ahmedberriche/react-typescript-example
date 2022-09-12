@@ -18,6 +18,23 @@
   z-index: 1;
   text-align: center;
 }
+.heading::after {
+  content: "";
+  display: inline-block;
+  width: 5rem;
+  height: 5px;
+  background-color: #edb506;
+  margin: 0 0 8px 10px;
+}
+
+.heading::before {
+  content: "";
+  display: inline-block;
+  width: 5rem;
+  height: 5px;
+  background-color: #edb506;
+  margin: 0 10px 8px 0;
+}
 
 @media (max-width: 800px) {
   .heading {
