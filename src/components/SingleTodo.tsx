@@ -48,6 +48,7 @@ const SingleTodo: React.FC<{
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           className={`todos__single ${snapshot.isDragging ? "drag" : ""}`}
+          data-testid={"todos-single"}
         >
           {edit ? (
             <input
@@ -57,24 +58,32 @@ const SingleTodo: React.FC<{
               ref={inputRef}
             />
           ) : todo.isDone ? (
-            <s className="todos__single--text">{todo.todo}</s>
+            <s data-testid="task-completed" className="todos__single--text">
+              {todo.todo}
+            </s>
           ) : (
-            <span className="todos__single--text">{todo.todo}</span>
+            <span data-testid="task-active" className="todos__single--text">
+              {todo.todo}
+            </span>
           )}
           <div>
             <span
               className="icon"
               onClick={() => {
-                if (!edit && !todo.isDone) {
+                if (!todo.isDone) {
                   setEdit(!edit);
                 }
               }}
             >
               <AiFillEdit />
             </span>
-            <span className="icon" onClick={() => handleDelete(todo.id)}>
+            <button
+              data-testid="button-delete"
+              className="icon"
+              onClick={() => handleDelete(todo.id)}
+            >
               <AiFillDelete />
-            </span>
+            </button>
             <span className="icon" onClick={() => handleDone(todo.id)}>
               <MdDone />
             </span>
