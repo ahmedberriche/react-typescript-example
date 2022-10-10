@@ -1,21 +1,17 @@
 import React from "react";
-import { Todo } from "../models/models";
-import SingleTodo from "./SingleTodo";
 import { Droppable } from "react-beautiful-dnd";
+import { TodosContext } from "../context/TodosProvider";
+import SingleTodo from "./SingleTodo";
 
 interface props {
-  todos: Array<Todo>;
-  setTodos: React.Dispatch<React.SetStateAction<Array<Todo>>>;
-  setCompletedTodos: React.Dispatch<React.SetStateAction<Array<Todo>>>;
-  CompletedTodos: Array<Todo>;
+
 }
 
 const TodoList: React.FC<props> = ({
-  todos,
-  setTodos,
-  CompletedTodos,
-  setCompletedTodos,
+
 }) => {
+  const {todos, CompletedTodos, setCompletedTodos, setTodos} = React.useContext(TodosContext)
+
   return (
     <div className="container">
       <Droppable droppableId="TodosList">
@@ -29,7 +25,6 @@ const TodoList: React.FC<props> = ({
             {todos?.map((todo, index) => (
               <SingleTodo
                 index={index}
-                todos={todos}
                 todo={todo}
                 key={todo.id}
                 setTodos={setTodos}
@@ -52,7 +47,6 @@ const TodoList: React.FC<props> = ({
             {CompletedTodos?.map((todo, index) => (
               <SingleTodo
                 index={index}
-                todos={CompletedTodos}
                 todo={todo}
                 key={todo.id}
                 setTodos={setCompletedTodos}

@@ -4,13 +4,14 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import { Todo } from "../models/models";
 import { Draggable } from "react-beautiful-dnd";
+import { TodosContext } from "../context/TodosProvider";
 
 const SingleTodo: React.FC<{
   index: number;
   todo: Todo;
-  todos: Array<Todo>;
-  setTodos: React.Dispatch<React.SetStateAction<Array<Todo>>>;
-}> = ({ index, todo, todos, setTodos }) => {
+  setTodos: (todo: Todo[]) => void
+}> = ({ index, todo, setTodos }) => {
+  const {todos} = React.useContext(TodosContext)
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
